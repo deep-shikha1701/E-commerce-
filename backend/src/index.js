@@ -11,7 +11,7 @@ env.config();
 //mongodb+srv://root:<password>@cluster0.jd5hw.mongodb.net/myFirstDatabase?retryWrites=true&w=majority
 //mongoose.connect(mongodb+srv://clusterAnything.mongodb.net/test?retryWrites=true&w=majority, { user: process.env.MONGO_USER, pass: process.env.MONGO_PASSWORD, useNewUrlParser: true, useUnifiedTopology: true })
 mongoose.connect(
-    `mongodb+srv://root:jYEdYTVMgrAuGl4x@cluster0.jd5hw.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`,
+    `mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASSWORD}@cluster0.jd5hw.mongodb.net/${process.env.MONGO_DATABASE}?retryWrites=true&w=majority`,
     {   
         useNewUrlParser: true, 
         useUnifiedTopology: true
