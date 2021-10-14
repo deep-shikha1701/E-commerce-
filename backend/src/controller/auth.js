@@ -1,5 +1,6 @@
 const User = require('../models/user');
 const jwt = require('jsonwebtoken');
+
 exports.signup = (req, res) => {
     User.findOne({ email: req.body.email})
     .exec((user, err) => {
@@ -57,10 +58,3 @@ exports.signin = (req, res) => {
     })
 }
 
-exports.requireSignin = (req, res,next) => {
-    const token = req.headers.authorization.split(" ")[1];
-    const user = jwt.verify(token,process.env.JWT_SECRET_KEY);
-    req.user = user
-    console.log(token);
-    next();
-}
