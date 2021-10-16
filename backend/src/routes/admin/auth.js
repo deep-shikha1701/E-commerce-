@@ -10,4 +10,4 @@ router.post('/admin/signup',validateSignupRequest , isRequestValidated, signup);
 
 
 
-module.exports = router;
+module.exports = router;    

@@ -4,9 +4,10 @@ const env = require('dotenv');
 const mongoose = require('mongoose');
 
 //Routes
-const authRoutes = require('./routes/auth')
-const adminRoutes = require('./routes/admin/auth')
-const categoryRoutes = require('./routes/category')
+const authRoutes = require('./routes/auth');
+const adminRoutes = require('./routes/admin/auth');
+const categoryRoutes = require('./routes/category');
+const productRoutes = require('./routes/product');
 
 //Environment Variables
 env.config();
@@ -29,6 +30,7 @@ app.use(express.urlencoded({
 app.use('/api', authRoutes);
 app.use('/api', adminRoutes);
 app.use('/api', categoryRoutes);
+app.use('/api', productRoutes);
 
 
 app.listen(process.env.PORT, () => {

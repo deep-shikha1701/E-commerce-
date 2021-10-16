@@ -5,11 +5,16 @@ backend/node_modules
 /.pnp
 .pnp.js
 
+
 # testing
 /coverage
 
 # production
 /build
+
+backend/uploads/
+backend/src/uploads/
+
 
 # misc
 .DS_Store
