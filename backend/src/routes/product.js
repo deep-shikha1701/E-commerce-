@@ -18,7 +18,7 @@ const storage = multer.diskStorage({
   const upload = multer({storage});
 
   
-router.post('/product/create', requireSignin, adminMiddleware,upload.array('productImage'), createProduct);
+router.post('/product/create', requireSignin, adminMiddleware,upload.array('productPictures'), createProduct);
 // router.get('/products/getCategory', getCategories)
 
 module.exports = router;
