@@ -1,6 +1,6 @@
 import React from 'react'
 import Layout from '../../Components/Layouts';
-import { Container, Jumbotron } from 'react-bootstrap'
+import { Container } from 'react-bootstrap'
 
 function Home() {
     return (

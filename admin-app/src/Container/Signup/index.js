@@ -17,7 +17,6 @@ function Signup() {
                                     <Input
                                         type="text"
                                         label="First Name"
-                                        value=''
                                         placeholder="Enter First Name"
                                         onChange={() => { }}
                                         className='mb-3'
@@ -27,7 +26,6 @@ function Signup() {
                                     <Input
                                         type="text"
                                         label="Last Name"
-                                        value=''
                                         placeholder="Enter Last Name"
                                         className='mb-3'
                                     />
@@ -37,7 +35,6 @@ function Signup() {
                                 <Input
                                     type="email"
                                     label="E-mail"
-                                    value=''
                                     placeholder="Enter e-mail address"
                                     onChange={() => { }}
                                     className='mb-3'
@@ -45,7 +42,6 @@ function Signup() {
                                 <Input
                                     type="password"
                                     label="Password"
-                                    value=''
                                     placeholder="Enter password"
                                     onChange={() => { }}
                                     className='mb-3'
