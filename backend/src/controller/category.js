@@ -27,37 +27,42 @@ function createCategories(categories, parentId = null) {
 
 exports.addCategory = (req, res) => {
 
-    const categoryObj = {
-        name: req.body.name,
-        slug: slugify(req.body.name)
-    }
+  const categoryObj = {
+    name: req.body.name,
+    slug: slugify(req.body.name),
+  }
 
-    if (req.body.parentId) {
-        categoryObj.parentId = req.body.parentId
-    }
+  if (req.file) {
+    categoryObj.categoryImage = process.env.API+'/public/' + req.file.filename;
+  }
 
-    const cat = Category(categoryObj);
-    cat.save((err, cat) => {
-        if (err) {
-            return res.status(400).json({ err });
-        }
-        if (cat) {
-            return res.status(201).json({ cat })
-        }
-    })
+
+  if (req.body.parentId) {
+    categoryObj.parentId = req.body.parentId
+  }
+
+  const cat = Category(categoryObj);
+  cat.save((err, cat) => {
+    if (err) {
+      return res.status(400).json({ err });
+    }
+    if (cat) {
+      return res.status(201).json({ cat })
+    }
+  })
 
 
 }
 
 exports.getCategories = (req, res) => {
-    Category.find({})
-        .exec((error, categories) => {
-            if (error)
-                return res.status(400).json({ error });
+  Category.find({})
+    .exec((error, categories) => {
+      if (error)
+        return res.status(400).json({ error });
 
-            if (categories) {
-                const categoryList = createCategories(categories);
-                return res.status(200).json({ categoryList })
-            }
-        })
+      if (categories) {
+        const categoryList = createCategories(categories);
+        return res.status(200).json({ categoryList })
+      }
+    })
 }
