@@ -3,6 +3,7 @@ const app = express();
 const env = require('dotenv');
 const mongoose = require('mongoose');
 const path = require('path');   
+const cors = require('cors');
 
 //Routes
 const authRoutes = require('./routes/auth');
@@ -24,6 +25,7 @@ mongoose.connect(
 });
 
 // app.use(bodyParser());
+app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({
     extended: true

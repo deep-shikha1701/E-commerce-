@@ -2,10 +2,20 @@ import React from 'react';
 import { Container, Form, Row, Col, Button } from 'react-bootstrap'
 import Layout from '../../Components/Layouts'
 import Input from '../../Components/UI/input';
+import { Redirect } from 'react-router';
+import { useSelector } from 'react-redux';
+
 
 
 
 function Signup() {
+
+    const auth = useSelector(state => state.auth);
+
+    if (auth.authenticate) {
+        return <Redirect to={`/`} />
+    }
+
     return (
         <div>
             <Layout>
@@ -46,11 +56,10 @@ function Signup() {
                                     onChange={() => { }}
                                     className='mb-3'
                                 />
+                                <Button variant="primary" size="sm" type="submit">
+                                    Submit
+                                </Button>
                             </Form>
-                            <Button variant="primary" size="sm" type="submit">
-                                Submit
-                            </Button>
-
                         </Col>
                     </Row>
 

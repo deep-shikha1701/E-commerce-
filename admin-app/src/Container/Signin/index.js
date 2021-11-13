@@ -1,26 +1,35 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Container, Form, Row, Col, Button } from 'react-bootstrap';
 import Layout from '../../Components/Layouts';
 import Input from '../../Components/UI/input';
 import { login } from '../../actions/index';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { Redirect } from 'react-router';
 
-const Signin = (props) => {
+const Signin = () => {
+
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [error, setError] = useState('');
+    const auth = useSelector(state => state.auth)
 
     const dispatch = useDispatch();
-
+    
     const userLogin = (e) => {
 
         e.preventDefault();
 
         const user = {
-            email: 'test@example.com',
-            password:'123456'
-        }   
+            email,
+            password
+        }
 
-        dispatch(login(user));  
+        dispatch(login(user));
     }
 
+    if(auth.authenticate){
+        return <Redirect to={`/`}/>
+    }
 
     return (
         <div>
@@ -33,14 +42,16 @@ const Signin = (props) => {
                                     type="email"
                                     label="E-mail"
                                     placeholder="Enter e-mail address"
-                                    onChange={() => { }}
+                                    value={email}
+                                    onChange={(e) => setEmail(e.target.value)}
                                     className='mb-3'
                                 />
                                 <Input
                                     type="password"
                                     label="Password"
                                     placeholder="Enter password"
-                                    onChange={() => { }}
+                                    value={password}
+                                    onChange={(e) => setPassword(e.target.value)}
                                     className='mb-3'
                                 />
                                 <Button variant="primary" size="sm" type="submit">
