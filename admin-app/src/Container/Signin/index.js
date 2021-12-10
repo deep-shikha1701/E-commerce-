@@ -10,10 +10,10 @@ const Signin = () => {
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [error, setError] = useState('');
+    // const [error, setError] = useState('');
     const auth = useSelector(state => state.auth)
 
-    const dispatch = useDispatch();
+    const dispatch = useDispatch(); 
     
     const userLogin = (e) => {
 

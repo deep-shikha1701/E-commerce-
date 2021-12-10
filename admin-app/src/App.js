@@ -5,7 +5,7 @@ import './App.css';
 import Home from './Container/Home';
 import Signin from './Container/Signin';
 import Signup from './Container/Signup';
-import PrivateRoute from './Container/HOC/PrivateRoute'
+import PrivateRoute from './Components/HOC/PrivateRoute'
 import { useDispatch, useSelector } from 'react-redux';
 import { isUserLoggedIn } from './actions/index';
 

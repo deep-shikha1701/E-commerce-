@@ -1,8 +1,8 @@
 import React from 'react';
 import { Navbar, Nav, Container } from 'react-bootstrap';
 import { NavLink, Link } from 'react-router-dom';
-import { useSelector,useDispatch } from 'react-redux';
-import {signout} from '../../actions/auth.actions'
+import { useSelector, useDispatch } from 'react-redux';
+import { signout } from '../../actions/auth.actions'
 
 
 export default function Header(props) {
@@ -10,7 +10,7 @@ export default function Header(props) {
     const auth = useSelector(state => state.auth)
     const dispatch = useDispatch();
 
-    const logout = () =>{
+    const logout = () => {
         dispatch(signout())
     }
 
@@ -26,7 +26,7 @@ export default function Header(props) {
     }
 
     const renderNonLoggedInLinks = () => {
-        return (
+        return (    
             <Nav>
                 {/* <Nav.Link href="#deets">Sign In</Nav.Link> */}
                 <li className='nav-item'>

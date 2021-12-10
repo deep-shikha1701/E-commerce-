@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types'
 import { Redirect, Route } from 'react-router'
 
 function PrivateRoute({ component: Component, ...rest }) {
