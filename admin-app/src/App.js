@@ -8,6 +8,8 @@ import Signup from './Container/Signup';
 import PrivateRoute from './Components/HOC/PrivateRoute'
 import { useDispatch, useSelector } from 'react-redux';
 import { isUserLoggedIn } from './actions/index';
+import Products from './Container/Products';
+import Orders from './Container/Orders';
 
 
 function App() {
@@ -17,7 +19,7 @@ function App() {
 
   useEffect(() => {
     if (!auth.authenticate) {
-      dispatch(isUserLoggedIn());
+      dispatch(isUserLoggedIn()); 
     }
   }, [])
 
@@ -27,6 +29,8 @@ function App() {
       {/* <Router> */}
       <Switch>
         <PrivateRoute path="/" exact component={Home} />
+        <PrivateRoute path='/products' component={Products  }/>
+        <PrivateRoute path='/orders' component={Orders}/>
         <Route path="/signin" component={Signin}></Route>
         <Route path="/signup" component={Signup}></Route>
       </Switch>
