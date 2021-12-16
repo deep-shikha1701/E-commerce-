@@ -41,6 +41,7 @@ const authReducer = (state = initialState, action) => {
                 ...initialState,
                 loading: true
             }
+            break;
         case authConstants.LOGOUT_SUCCESS:
             state = {
                 ...initialState,
