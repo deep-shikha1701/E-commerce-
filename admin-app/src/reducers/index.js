@@ -12,6 +12,7 @@ const rootReducer = combineReducers({
     order: orderReducer,
     products: productReducer,
 
+
 })
 
 export default rootReducer;

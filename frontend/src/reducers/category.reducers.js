@@ -52,8 +52,9 @@ export default (state = initialState, action) =>{
         case categoryConstants.GET_ALL_CATEGORIES_SUCCESS:
             state = {
                 ...state,
-                categories: action.payload.categories
+                categories: action.payload.category
             }
+
             break;
         case categoryConstants.ADD_NEW_CATEGORY_REQUEST: 
             state = {

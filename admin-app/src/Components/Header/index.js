@@ -42,7 +42,7 @@ export default function Header(props) {
 
     return (
         <div>
-            <Navbar style={{ zIndex: 1 }} collapseOnSelect expand="lg" bg="dark" variant="dark">
+            <Navbar style={{ zIndex: 1 }}fixed="top" collapseOnSelect expand="lg" bg="dark" variant="dark">
                 <Container fluid    >
                     {/* <Navbar.Brand href="#home">Admin Dashboard</Navbar.Brand> */}
                     <Link className="navbar-brand" to='/'>Admin Dashboard</Link>

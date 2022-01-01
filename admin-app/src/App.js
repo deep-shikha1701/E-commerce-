@@ -7,10 +7,11 @@ import Signin from './Container/Signin';
 import Signup from './Container/Signup';
 import PrivateRoute from './Components/HOC/PrivateRoute'
 import { useDispatch, useSelector } from 'react-redux';
-import { isUserLoggedIn } from './actions/index';
+import { isUserLoggedIn  } from './actions/index';
 import Products from './Container/Products';
 import Orders from './Container/Orders';
 import Category from './Container/Category';
+import { getInitialData } from './actions/index';
 
 
 function App() {
@@ -22,6 +23,9 @@ function App() {
     if (!auth.authenticate) {
       dispatch(isUserLoggedIn()); 
     }
+
+    dispatch(getInitialData());
+
   }, [])
 
 
