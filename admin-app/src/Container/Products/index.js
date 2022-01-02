@@ -95,11 +95,15 @@ const Products = (props) => {
                     {product.products.length > 0
                         ? product.products.map((product) => (
                             <tr key={product._id}>
-                                <td>2</td>
+                                <td>#</td>
                                 <td>{product.name}</td>
                                 <td>{product.price}</td>
                                 <td>{product.quantity}</td>
-                                <td>{product.category.name}</td>
+                                { product.category ?
+                                    <td>{product.category.name}</td>
+                                    : <td>--</td>
+                                }
+                                    
                                 <td>
                                     <button onClick={() => showProductDetailsModal(product)}>
                                         info
@@ -141,23 +145,26 @@ const Products = (props) => {
                 <Input
                     label="Price"
                     value={price}
-                    placeholder={`Product Name`}
+                    placeholder={`Price`}
                     onChange={(e) => setPrice(e.target.value)}
                 />
                 <Input
-                    label="Qunatity"
+                    label="Quantity"
                     value={quantity}
                     type="number"
                     min="1"
                     placeholder="0"
                     onChange={(e) => setQuantity(e.target.value)}
                 />
-                <Input
+                <label>Description</label><br></br>
+                <textarea
+                    cols="60"
+                    rows="5"
                     label="Description"
                     value={description}
                     placeholder="Description"
                     onChange={(e) => setDescription(e.target.value)}
-                />
+                /><br></br>
                 <label>Category</label>
                 <select
                     label="Category Name"
@@ -178,7 +185,6 @@ const Products = (props) => {
                     name="productPictures"
                     onChange={handleProductPictures}
                     type="file"
-                    multiple
                 />
             </ModalComponent>
         )
