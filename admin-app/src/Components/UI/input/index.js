@@ -5,7 +5,7 @@ const Input = (props) => {
     return (
         <div>
             <Form.Group className={props.className}>
-                <Form.Label>{props.label}</Form.Label>
+                {props.label? <Form.Label>{props.label}</Form.Label> : null}
                 <Form.Control
                     type={props.type}
                     placeholder={props.placeholder}

@@ -16,7 +16,7 @@ const ProductListPage = (props) => {
         under15k:15000,
         under20k:20000
     })
-    console.log(product);
+    // console.log(product);
     useEffect(() => {
         // console.log("Props", props);
         const { match } = props;

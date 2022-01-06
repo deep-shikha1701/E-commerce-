@@ -21,6 +21,10 @@ const ModalComponent = (props) => {
                     <Button onClick={props.handleAddButton}>Add</Button>
                     : null
                 }
+                {props.handleUpdateButton ?
+                    <Button onClick={props.handleUpdateButton}>Update</Button>
+                    : null
+                }
             </Modal.Footer>
         </Modal>
 

@@ -67,3 +67,4 @@ exports.getCategories = (req, res) => {
       }
     })
 }
+
