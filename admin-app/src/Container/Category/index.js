@@ -18,6 +18,7 @@ function Category() {
     const [categoryImage, setCategoryImage] = useState('');
     const [modalShow, setModalShow] = useState(false);
     const [updateModalShow, setUpdateModalShow] = useState(false);
+    const [deleteModalShow, setDeleteModalShow] = useState(false);
     const dispatch = useDispatch();
 
     const [checked, setChecked] = useState([])
@@ -110,7 +111,7 @@ function Category() {
         setUpdateModalShow(false);
     }
 
-    const updateCategory = () => {
+    const updateCheckednExpandedArray = () => {
         const categories = createCategoryList(category.categories);
         const checkedArray = []
         const expandedArray = []
@@ -126,10 +127,7 @@ function Category() {
         setCheckedArray(checkedArray);
         setExpandedArray(expandedArray);
 
-        console.log({
-            checked, expanded, categories, checkedArray, expandedArray
-        })
-    }
+        }
 
     const handleCloseButton = () => {
         setModalShow(false);
@@ -273,6 +271,23 @@ function Category() {
         )
     }
 
+    const renderDeleteCategoryModal = () => {
+
+        console.log(`delete`, checkedArray);
+
+        return (
+            <ModalComponent
+                modalTitle="Confirm Delete"
+                size='md'
+                show={deleteModalShow}
+                handleClose={()=>setDeleteModalShow(false)}
+                handleDeleteButton={()=>{}}
+            >   
+                <p>Are you sure you want to delete this category?</p>
+            </ModalComponent>
+        )
+    }
+
     return (
         <Layout sidebar>
             <Container>
@@ -307,8 +322,8 @@ function Category() {
                 </Row>
                 <Row>
                     <Col>
-                        <button onClick={() => { setUpdateModalShow(true); updateCategory(); }}>Update</button>
-                        <button >Delete</button>
+                        <button onClick={() => { setUpdateModalShow(true); updateCheckednExpandedArray(); }}>Update</button>
+                        <button onClick={() => {setDeleteModalShow(true);updateCheckednExpandedArray();}}>Delete</button>
                     </Col>
                 </Row>
 
@@ -316,6 +331,8 @@ function Category() {
             {renderAddCategoryModal()}
             {/* Modal to Update a Category */}
             {renderUpdateCategoriesModal()}
+
+            {renderDeleteCategoryModal()}
 
         </Layout >
     )

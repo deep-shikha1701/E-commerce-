@@ -16,13 +16,25 @@ const ModalComponent = (props) => {
                 {props.children}
             </Modal.Body>
             <Modal.Footer>
-                <Button onClick={props.handleClose}>Close</Button>
                 {props.handleAddButton ?
-                    <Button onClick={props.handleAddButton}>Add</Button>
+                    <>                
+                        <Button onClick={props.handleClose}>Close</Button>
+                        <Button onClick={props.handleAddButton}>Add</Button>
+                    </>
                     : null
                 }
                 {props.handleUpdateButton ?
-                    <Button onClick={props.handleUpdateButton}>Update</Button>
+                    <>
+                        <Button onClick={props.handleClose}>Close</Button>
+                        <Button onClick={props.handleUpdateButton}>Update</Button>
+                    </>
+                    : null
+                }
+                {props.handleDeleteButton?
+                    <>
+                        <Button onClick={props.handleClose}>No</Button>
+                        <Button onClick={props.handleUpdateButton}>Yes</Button>  
+                    </>
                     : null
                 }
             </Modal.Footer>
