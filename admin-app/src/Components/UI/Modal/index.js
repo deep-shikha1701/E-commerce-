@@ -33,7 +33,7 @@ const ModalComponent = (props) => {
                 {props.handleDeleteButton?
                     <>
                         <Button onClick={props.handleClose}>No</Button>
-                        <Button onClick={props.handleUpdateButton}>Yes</Button>  
+                        <Button onClick={props.handleDeleteButton}>Yes</Button>  
                     </>
                     : null
                 }

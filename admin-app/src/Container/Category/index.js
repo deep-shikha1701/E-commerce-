@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import CheckboxTree from 'react-checkbox-tree';
 import { Container, Row, Col, } from 'react-bootstrap';
 import { FiSquare, FiCheckSquare, FiChevronRight, FiChevronDown } from "react-icons/fi";
 import 'react-checkbox-tree/lib/react-checkbox-tree.css';
 import { useDispatch, useSelector } from 'react-redux';
-import { addCategory,updateCategories,getAllCategory } from '../../actions';
+import { addCategory, updateCategories, getAllCategory ,deleteCategories} from '../../actions';
 import Layout from '../../Components/Layouts';
 import Input from '../../Components/UI/input';
 import ModalComponent from '../../Components/UI/Modal';
@@ -12,7 +12,7 @@ import ModalComponent from '../../Components/UI/Modal';
 
 function Category() {
 
-    const category = useSelector(state => state.category)   
+    const category = useSelector(state => state.category)
     const [categoryName, setCategoryName] = useState('');
     const [parentCategoryId, setParentCategoryId] = useState('');
     const [categoryImage, setCategoryImage] = useState('');
@@ -26,6 +26,9 @@ function Category() {
     const [checkedArray, setCheckedArray] = useState([]);
     const [expandedArray, setExpandedArray] = useState([]);
 
+    // useEffect(() => {
+    //     updateCheckednExpandedArray();
+    // },[checkedArray, expandedArray]);
 
 
     const renderCategories = (categories) => {
@@ -90,25 +93,38 @@ function Category() {
         expandedArray.forEach((item, index) => {
             form.append('_id', item.value);
             form.append('name', item.name);
-            form.append('parentId', item.parentId ? item.parentId :"");
+            form.append('parentId', item.parentId ? item.parentId : "");
             form.append('type', item.type)
         })
         checkedArray.forEach((item, index) => {
             form.append('_id', item.value);
             form.append('name', item.name);
-            form.append('parentId', item.parentId ? item.parentId :"");
+            form.append('parentId', item.parentId ? item.parentId : "");
             form.append('type', item.type)
 
         })
         dispatch(updateCategories(form)).then(
             result => {
-                if (result){
+                if (result) {
                     dispatch(getAllCategory())
                 }
             }
         )
 
         setUpdateModalShow(false);
+    }
+
+    const handleDeleteButton = () => {
+        const deleteItemsArray = checkedArray.map((item, index) =>({_id: item.value}));
+        dispatch(deleteCategories(deleteItemsArray)).then(
+            result => {
+                console.log(`result`,result);
+                if (result) {
+                    dispatch(getAllCategory())
+                }
+            }
+        )
+        setDeleteModalShow(false);
     }
 
     const updateCheckednExpandedArray = () => {
@@ -126,8 +142,9 @@ function Category() {
         })
         setCheckedArray(checkedArray);
         setExpandedArray(expandedArray);
+        // console.log("checked array: ", checkedArray)
 
-        }
+    }
 
     const handleCloseButton = () => {
         setModalShow(false);
@@ -273,17 +290,31 @@ function Category() {
 
     const renderDeleteCategoryModal = () => {
 
-        console.log(`delete`, checkedArray);
-
+        // console.log(`delete`, checkedArray);
         return (
             <ModalComponent
                 modalTitle="Confirm Delete"
                 size='md'
                 show={deleteModalShow}
-                handleClose={()=>setDeleteModalShow(false)}
-                handleDeleteButton={()=>{}}
-            >   
-                <p>Are you sure you want to delete this category?</p>
+                handleClose={() => setDeleteModalShow(false)}
+                handleDeleteButton={handleDeleteButton}
+            >
+                <h6>Checked Items</h6>
+                {/* {
+                    expandedArray.length > 0 && checkedArray.length > 0 ?
+                    expandedArray.map((item, index) =>
+                        <li key={index}>{item.name}</li>
+                    ) 
+                    : null                    
+                } */}
+                {
+                    checkedArray.length > 0 &&
+                    checkedArray.map((item, index) =>
+                        <li key={index}>{item.name}</li>
+                    )
+
+                }
+                <p>Are you sure you want to delete this category(s)?</p>
             </ModalComponent>
         )
     }
@@ -323,7 +354,7 @@ function Category() {
                 <Row>
                     <Col>
                         <button onClick={() => { setUpdateModalShow(true); updateCheckednExpandedArray(); }}>Update</button>
-                        <button onClick={() => {setDeleteModalShow(true);updateCheckednExpandedArray();}}>Delete</button>
+                        <button onClick={() => { setDeleteModalShow(true); updateCheckednExpandedArray(); }}>Delete</button>
                     </Col>
                 </Row>
 
