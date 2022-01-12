@@ -118,7 +118,6 @@ function Category() {
         const deleteItemsArray = checkedArray.map((item, index) =>({_id: item.value}));
         dispatch(deleteCategories(deleteItemsArray)).then(
             result => {
-                console.log(`result`,result);
                 if (result) {
                     dispatch(getAllCategory())
                 }
