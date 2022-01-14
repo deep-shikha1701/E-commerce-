@@ -18,22 +18,22 @@ const ModalComponent = (props) => {
             <Modal.Footer>
                 {props.handleAddButton ?
                     <>                
-                        <Button onClick={props.handleClose}>Close</Button>
-                        <Button onClick={props.handleAddButton}>Add</Button>
+                        <Button size="sm" onClick={props.handleClose}>Close</Button>
+                        <Button size="sm" onClick={props.handleAddButton}>Add</Button>
                     </>
                     : null
                 }
                 {props.handleUpdateButton ?
                     <>
-                        <Button onClick={props.handleClose}>Close</Button>
-                        <Button onClick={props.handleUpdateButton}>Update</Button>
+                        <Button size="sm" v onClick={props.handleClose}>Close</Button>
+                        <Button size="sm" onClick={props.handleUpdateButton}>Update</Button>
                     </>
                     : null
                 }
                 {props.handleDeleteButton?
                     <>
-                        <Button onClick={props.handleClose}>No</Button>
-                        <Button onClick={props.handleDeleteButton}>Yes</Button>  
+                        <Button size="sm" onClick={props.handleClose}>No</Button>
+                        <Button size="sm" onClick={props.handleDeleteButton}>Yes</Button>  
                     </>
                     : null
                 }

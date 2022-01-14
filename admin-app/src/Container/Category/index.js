@@ -2,13 +2,16 @@ import React, { useState, useEffect } from 'react';
 import CheckboxTree from 'react-checkbox-tree';
 import { Container, Row, Col, } from 'react-bootstrap';
 import { FiSquare, FiCheckSquare, FiChevronRight, FiChevronDown } from "react-icons/fi";
+import {GrAddCircle } from "react-icons/gr";
+import {MdModeEditOutline , MdAddBox, MdDelete} from "react-icons/md";
 import 'react-checkbox-tree/lib/react-checkbox-tree.css';
 import { useDispatch, useSelector } from 'react-redux';
-import { addCategory, updateCategories, getAllCategory ,deleteCategories} from '../../actions';
+import { addCategory, updateCategories, getAllCategory, deleteCategories } from '../../actions';
 import Layout from '../../Components/Layouts';
 import UpdateCategoriesModal from './components/updateCategoryModal';
 import AddCategoryModal from './components/addCategoryModal';
 import DeleteCategoryModal from './components/deleteCategoryModal';
+import './style.css';
 
 
 function Category() {
@@ -101,7 +104,7 @@ function Category() {
     }
 
     const handleDeleteButton = () => {
-        const deleteItemsArray = checkedArray.map((item, index) =>({_id: item.value}));
+        const deleteItemsArray = checkedArray.map((item, index) => ({ _id: item.value }));
         dispatch(deleteCategories(deleteItemsArray)).then(
             result => {
                 if (result) {
@@ -151,7 +154,12 @@ function Category() {
                     <Col md={12}>
                         <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                             <h3>Category</h3>
-                            <button onClick={() => { setAddModalShow(true) }} >Add</button>
+                            <div className="actionBtnContainer">
+                                <span>Actions: </span>
+                                <button onClick={() => { setAddModalShow(true) }} ><MdAddBox /><span> Add </span></button>
+                                <button onClick={() => { setUpdateModalShow(true); updateCheckednExpandedArray(); }}><MdModeEditOutline /><span> Update </span></button>
+                                <button onClick={() => { setDeleteModalShow(true); updateCheckednExpandedArray(); }}><MdDelete /><span> Delete </span></button>
+                            </div>
                         </div>
                     </Col>
                 </Row>
@@ -176,25 +184,18 @@ function Category() {
                         />
                     </Col>
                 </Row>
-                <Row>
-                    <Col>
-                        <button onClick={() => { setUpdateModalShow(true); updateCheckednExpandedArray(); }}>Update</button>
-                        <button onClick={() => { setDeleteModalShow(true); updateCheckednExpandedArray(); }}>Delete</button>
-                    </Col>
-                </Row>
-
             </Container>
             {/* {renderAddCategoryModal()} */}
             {/* Modal to Update a Category */}
             <AddCategoryModal
                 show={addModalShow}
                 modalTitle="Add Category"
-                handleClose={()=>setAddModalShow(false)}
+                handleClose={() => setAddModalShow(false)}
                 handleAddButton={handleAddCategory}
                 categoryList={categoryList}
-                handleCategoryImage={handleCategoryImage} 
-                categoryName={categoryName}    
-                size="sm"
+                handleCategoryImage={handleCategoryImage}
+                categoryName={categoryName}
+                size="md"
                 setCategoryName={setCategoryName}
                 parentCategoryId={parentCategoryId}
                 setParentCategoryId={setParentCategoryId}

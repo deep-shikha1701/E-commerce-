@@ -24,11 +24,11 @@ export const login = (user) => {
                 }
             })
         }
-        else {
+        else{
             if (res.status === 400) {
                 dispatch({
                     type: authConstants.LOGIN_FAILURE,
-                    payload: { error: res.data.error }
+                    payload: { error: res.data.error }  
                 })
             }
         }
@@ -50,7 +50,7 @@ export const isUserLoggedIn = () => {
         } else {
             dispatch({
                 type: authConstants.LOGIN_FAILURE,
-                payaload: { error: "Login Failed!!" }
+                payload: { error: "Login Failed!!" }
             })
         }
     }

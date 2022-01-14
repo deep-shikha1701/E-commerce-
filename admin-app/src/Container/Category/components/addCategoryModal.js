@@ -28,19 +28,27 @@ const AddCategoryModal = (props) => {
             handleAddButton={handleAddButton}
             size={size}
         >
-            <Input
-                label="Name"
-                value={categoryName}
-                placeholder={`Category Name`}
-                onChange={(e) => setCategoryName(e.target.value)}
-            />
-            <select label="Category Name" onChange={(e) => setCategoryName} className="form-control" value={parentCategoryId} onChange={(e) => { setParentCategoryId(e.target.value) }}>
-                <option>Select Category</option>
-                {
-                    categoryList.map(option => <option key={option.value} value={option.value}>{option.name}</option>)
-                }
-            </select>
-            <input label="Category Image" type='file' name="categoryImage" onChange={handleCategoryImage} />
+            <Row>
+                <Col>
+                    <Input
+                        value={categoryName}
+                        placeholder={`Category Name`}
+                        onChange={(e) => setCategoryName(e.target.value)}
+                    />
+                </Col>
+                <Col>
+                    <select label="Category Name" onChange={(e) => setCategoryName} className="form-control" value={parentCategoryId} onChange={(e) => { setParentCategoryId(e.target.value) }}>
+                        <option>Select Category</option>
+                        {
+                            categoryList.map(option => <option key={option.value} value={option.value}>{option.name}</option>)
+                        }
+                    </select>
+                </Col>
+            </Row>
+            <br></br>
+            <Row>
+                <input label="Category Image" type='file' name="categoryImage" onChange={handleCategoryImage} />
+            </Row>
         </ModalComponent>
     )
 }
