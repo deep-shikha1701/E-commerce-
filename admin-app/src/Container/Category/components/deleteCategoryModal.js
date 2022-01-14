@@ -1,4 +1,5 @@
 import React from 'react';
+import ModalComponent from '../../../Components/UI/Modal';
 
 
 
@@ -10,15 +11,14 @@ const DeleteCategoryModal = (props) => {
         size,
         handleClose,
         handleDeleteButton,
-        checkedArray
-        setDeleteModalShow
+        checkedArray,
     } = props;
     return (
         <ModalComponent
-            modalTitle="Confirm Delete"
-            size='md'
-            show={deleteModalShow}
-            handleClose={() => setDeleteModalShow(false)}
+            modalTitle={modalTitle}
+            size={size}
+            show={show}
+            handleClose={handleClose}
             handleDeleteButton={handleDeleteButton}
         >
             <h6>Checked Items</h6>

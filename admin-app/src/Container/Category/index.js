@@ -6,10 +6,9 @@ import 'react-checkbox-tree/lib/react-checkbox-tree.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { addCategory, updateCategories, getAllCategory ,deleteCategories} from '../../actions';
 import Layout from '../../Components/Layouts';
-import Input from '../../Components/UI/input';
-import ModalComponent from '../../Components/UI/Modal';
 import UpdateCategoriesModal from './components/updateCategoryModal';
 import AddCategoryModal from './components/addCategoryModal';
+import DeleteCategoryModal from './components/deleteCategoryModal';
 
 
 function Category() {
@@ -18,7 +17,7 @@ function Category() {
     const [categoryName, setCategoryName] = useState('');
     const [parentCategoryId, setParentCategoryId] = useState('');
     const [categoryImage, setCategoryImage] = useState('');
-    const [modalShow, setModalShow] = useState(false);
+    const [addModalShow, setAddModalShow] = useState(false);
     const [updateModalShow, setUpdateModalShow] = useState(false);
     const [deleteModalShow, setDeleteModalShow] = useState(false);
     const dispatch = useDispatch();
@@ -66,12 +65,6 @@ function Category() {
     const handleAddCategory = (e) => {
 
         const form = new FormData();
-        // const cat = {
-        //     categoryName,
-        //     parentCategoryId,
-        //     categoryImage
-        // }
-
         form.append('name', categoryName);
         form.append('parentId', parentCategoryId);
         form.append('categoryImage', categoryImage);
@@ -79,10 +72,7 @@ function Category() {
         setCategoryName('');
         setParentCategoryId('');
 
-
-        // console.log(cat);
-
-        setModalShow(false)
+        setAddModalShow(false)
     }
 
     const handleUpdateButton = () => {
@@ -107,7 +97,6 @@ function Category() {
                 }
             }
         )
-
         setUpdateModalShow(false);
     }
 
@@ -138,12 +127,6 @@ function Category() {
         })
         setCheckedArray(checkedArray);
         setExpandedArray(expandedArray);
-        // console.log("checked array: ", checkedArray)
-
-    }
-
-    const handleCloseButton = () => {
-        setModalShow(false);
 
     }
 
@@ -158,27 +141,6 @@ function Category() {
         }
     }
 
-    const renderDeleteCategoryModal = () => {
-        return (
-            <ModalComponent
-                modalTitle="Confirm Delete"
-                size='md'
-                show={deleteModalShow}
-                handleClose={() => setDeleteModalShow(false)}
-                handleDeleteButton={handleDeleteButton}
-            >
-                <h6>Checked Items</h6>
-                {
-                    checkedArray.length > 0 &&
-                    checkedArray.map((item, index) =>
-                        <li key={index}>{item.name}</li>
-                    )
-
-                }
-                <p>Are you sure you want to delete this category(s)?</p>
-            </ModalComponent>
-        )
-    }
 
     const categoryList = createCategoryList(category.categories);
 
@@ -189,7 +151,7 @@ function Category() {
                     <Col md={12}>
                         <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                             <h3>Category</h3>
-                            <button onClick={() => { setModalShow(true) }} >Add</button>
+                            <button onClick={() => { setAddModalShow(true) }} >Add</button>
                         </div>
                     </Col>
                 </Row>
@@ -225,14 +187,15 @@ function Category() {
             {/* {renderAddCategoryModal()} */}
             {/* Modal to Update a Category */}
             <AddCategoryModal
-                show={modalShow}
+                show={addModalShow}
                 modalTitle="Add Category"
-                handleClose={handleCloseButton}
+                handleClose={()=>setAddModalShow(false)}
                 handleAddButton={handleAddCategory}
                 categoryList={categoryList}
                 handleCategoryImage={handleCategoryImage} 
                 categoryName={categoryName}    
                 size="sm"
+                setCategoryName={setCategoryName}
                 parentCategoryId={parentCategoryId}
                 setParentCategoryId={setParentCategoryId}
             />
@@ -250,7 +213,15 @@ function Category() {
                 categoryList={categoryList}
                 category={category}
             />
-            {renderDeleteCategoryModal()}
+            {/* {renderDeleteCategoryModal()} */}
+            <DeleteCategoryModal
+                modalTitle="Confirm Delete"
+                size='md'
+                show={deleteModalShow}
+                handleClose={() => setDeleteModalShow(false)}
+                handleDeleteButton={handleDeleteButton}
+                checkedArray={checkedArray}
+            />
         </Layout >
     )
 }
