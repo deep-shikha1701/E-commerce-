@@ -71,7 +71,7 @@ exports.getCategories = (req, res) => {
 exports.updateCategories = async (req, res) => {
   const { _id, name, parentId, type } = req.body;
   const updatedCategories = [];
-  if (name instanceof Array) {
+  if (name instanceof Array) {  
     for (let i = 0; i < name.length; i++) {
       const category = {
         name: name[i],
@@ -85,7 +85,7 @@ exports.updateCategories = async (req, res) => {
         { _id: _id[i] },
         category,
         { new: true }
-      );
+      );  
       updatedCategories.push(updatedCategory);
     }
     return res.status(201).json({ updateCategories: updatedCategories });
@@ -106,17 +106,18 @@ exports.updateCategories = async (req, res) => {
 
 
 exports.deleteCategories = async (req, res) => {
-    const { ids } = req.body.payload;
-    const deletedCategories = [];
-    for(let i=0;i<ids.length;i++){
-      const deleteCategory = await Category.findOneAndDelete({_id: ids[i]._id});
-      deletedCategories.push(deleteCategory);
-    }
+  const { ids } = req.body.payload;
+  const deletedCategories = [];
+  for (let i = 0; i < ids.length; i++) {
+    const deleteCategory = await Category.findOneAndDelete({ _id: ids[i]._id });
+    deletedCategories.push(deleteCategory);
+  }
 
-    if(deletedCategories.length == ids.length){
-      res.status(201).json({
-        message: `${deletedCategories.length} categories removed`})
-    } else {
-      res.status(400).json({message: `Something went wrong!!`})
-    }
+  if (deletedCategories.length == ids.length) {
+    res.status(201).json({
+      message: `${deletedCategories.length} categories removed`
+    })
+  } else {
+    res.status(400).json({ message: `Something went wrong!!` })
+  }
 }

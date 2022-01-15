@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import CheckboxTree from 'react-checkbox-tree';
 import { Container, Row, Col, } from 'react-bootstrap';
 import { FiSquare, FiCheckSquare, FiChevronRight, FiChevronDown } from "react-icons/fi";
-import {GrAddCircle } from "react-icons/gr";
 import {MdModeEditOutline , MdAddBox, MdDelete} from "react-icons/md";
 import 'react-checkbox-tree/lib/react-checkbox-tree.css';
 import { useDispatch, useSelector } from 'react-redux';
@@ -51,7 +50,12 @@ function Category() {
     const createCategoryList = (categories, options = []) => {
         if (categories) {
             for (let category of categories) {
-                options.push({ value: category._id, name: category.name, parentId: category.parentId });
+                options.push({ 
+                    value: category._id, 
+                    name: category.name, 
+                    parentId: category.parentId,
+                    type: category.type
+                });
                 if (category.children.length > 0) {
                     createCategoryList(category.children, options);
                 }
@@ -93,25 +97,13 @@ function Category() {
             form.append('type', item.type)
 
         })
-        dispatch(updateCategories(form)).then(
-            result => {
-                if (result) {
-                    dispatch(getAllCategory())
-                }
-            }
-        )
+        dispatch(updateCategories(form));
         setUpdateModalShow(false);
     }
 
     const handleDeleteButton = () => {
         const deleteItemsArray = checkedArray.map((item, index) => ({ _id: item.value }));
-        dispatch(deleteCategories(deleteItemsArray)).then(
-            result => {
-                if (result) {
-                    dispatch(getAllCategory())
-                }
-            }
-        )
+        dispatch(deleteCategories(deleteItemsArray));
         setDeleteModalShow(false);
     }
 
@@ -140,7 +132,6 @@ function Category() {
         } else if (type === 'expanded') {
             const updatedExpandedArray = checkedArray.map((item, _index) => index === _index ? { ...item, [key]: value } : item);
             setExpanded(updatedExpandedArray);
-
         }
     }
 
