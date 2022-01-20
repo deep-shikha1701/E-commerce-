@@ -11,7 +11,7 @@ const getAllCategory = () => {
         if (res.status === 200) {
 
             const { categoryList } = res.data;
-
+            console.log(`here`, categoryList);
             dispatch({
                 type: categoryConstants.GET_ALL_CATEGORIES_SUCCESS,
                 payload: { categories: categoryList }

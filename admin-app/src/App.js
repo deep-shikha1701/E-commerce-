@@ -5,6 +5,7 @@ import './App.css';
 import Home from './Container/Home';
 import Signin from './Container/Signin';
 import Signup from './Container/Signup';
+import Page from './Container/Page'
 import PrivateRoute from './Components/HOC/PrivateRoute'
 import { useDispatch, useSelector } from 'react-redux';
 import { isUserLoggedIn  } from './actions/index';
@@ -34,9 +35,10 @@ function App() {
       {/* <Router> */}
       <Switch>
         <PrivateRoute path="/" exact component={Home} />
+        <PrivateRoute path='/category' component={Category}/>
+        <PrivateRoute path='/page' component={Page} />
         <PrivateRoute path='/products' component={Products}/>
         <PrivateRoute path='/orders' component={Orders}/>
-        <PrivateRoute path='/category' component={Category}/>
         <Route path="/signin" component={Signin}></Route>
         <Route path="/signup" component={Signup}></Route>
       </Switch>

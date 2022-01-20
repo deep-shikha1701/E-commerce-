@@ -1,15 +1,16 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import CheckboxTree from 'react-checkbox-tree';
 import { Container, Row, Col, } from 'react-bootstrap';
 import { FiSquare, FiCheckSquare, FiChevronRight, FiChevronDown } from "react-icons/fi";
 import {MdModeEditOutline , MdAddBox, MdDelete} from "react-icons/md";
 import 'react-checkbox-tree/lib/react-checkbox-tree.css';
 import { useDispatch, useSelector } from 'react-redux';
-import { addCategory, updateCategories, getAllCategory, deleteCategories } from '../../actions';
+import { addCategory, updateCategories, deleteCategories } from '../../actions';
 import Layout from '../../Components/Layouts';
 import UpdateCategoriesModal from './components/updateCategoryModal';
 import AddCategoryModal from './components/addCategoryModal';
 import DeleteCategoryModal from './components/deleteCategoryModal';
+import createCategoryList from '../../helpers/linearCategories';
 import './style.css';
 
 
@@ -47,23 +48,6 @@ function Category() {
     }
 
 
-    const createCategoryList = (categories, options = []) => {
-        if (categories) {
-            for (let category of categories) {
-                options.push({ 
-                    value: category._id, 
-                    name: category.name, 
-                    parentId: category.parentId,
-                    type: category.type
-                });
-                if (category.children.length > 0) {
-                    createCategoryList(category.children, options);
-                }
-            }
-        }
-
-        return options;
-    }
 
     const handleCategoryImage = (e) => {
         setCategoryImage(e.target.files[0]);

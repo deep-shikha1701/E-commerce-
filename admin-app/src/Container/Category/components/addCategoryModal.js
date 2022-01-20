@@ -1,7 +1,7 @@
 import React from 'react';
 import ModalComponent from '../../../Components/UI/Modal';
 import Input from '../../../Components/UI/input'
-import { Container, Row, Col, } from 'react-bootstrap';
+import { Row, Col, } from 'react-bootstrap';
 
 
 const AddCategoryModal = (props) => {
@@ -37,10 +37,10 @@ const AddCategoryModal = (props) => {
                     />
                 </Col>
                 <Col>
-                    <select label="Category Name" onChange={(e) => setCategoryName} className="form-control" value={parentCategoryId} onChange={(e) => { setParentCategoryId(e.target.value) }}>
+                    <select className="form-control" value={parentCategoryId} onChange={(e) => { setParentCategoryId(e.target.value) }}>
                         <option>Select Category</option>
                         {
-                            categoryList.map(option => <option key={option.value} value={option.value}>{option.name}</option>)
+                            categoryList.map(option => <option key={option._id} value={option._id}>{option.name}</option>)
                         }
                     </select>
                 </Col>
