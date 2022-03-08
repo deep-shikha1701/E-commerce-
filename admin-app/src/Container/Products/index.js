@@ -234,7 +234,7 @@ const Products = (props) => {
                         <div style={{ display: 'flex' }}>
                             {productDetails.productPictures.map(picture =>
                                 <div className="productImageContainer">
-                                    <img src={generatePublicUrl(picture.img)} />
+                                    <img alt="" src={generatePublicUrl(picture.img)} />
                                 </div>
                             )}
                         </div>

@@ -1,4 +1,23 @@
 const jwt = require('jsonwebtoken');
+const multer = require('multer');
+const {nanoid} = require('nanoid');
+const path = require('path');
+
+
+
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+      cb(null, path.join(path.dirname(__dirname),'uploads'))
+    },
+    filename: function (req, file, cb) {
+        var ID = nanoid(20);
+      cb(null, ID +'-'+file.originalname)
+    }
+  })
+
+exports.upload = multer({storage});
+
+
 
 exports.requireSignin = (req, res, next) => {
 
@@ -28,3 +47,5 @@ exports.adminMiddleware = (req, res, next) => {
     }
     next();
 }
+
+

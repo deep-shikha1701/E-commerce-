@@ -16,6 +16,7 @@ const Page = () => {
     const [categories, setCategories] = useState([]);
     const [categoryId, setCategoryId] = useState('');
     const [description, setDescription] = useState('');
+    const [type, setType] = useState('');
     const [banners, setBanners] = useState([]);
     const [products, setProducts] = useState([])
 
@@ -25,14 +26,39 @@ const Page = () => {
     }, [category])
 
     const handleBannerImages = (e) => {
-        console.log(e)
+        setBanners([...banners, e.target.files[0]])
     }
     const handleProductImages = (e) => {
-        console.log(e)
+        setProducts([...products, e.target.files[0]])
     }
 
     const onCategoryChange = (e) => {
+        const category = category.categories.find(category =>category._id === e.target.value); 
         setCategoryId(e.target.value);
+        setType(category.type);
+    }
+
+    const submitPageForm=(e) => {
+        e.preventDefault();
+        if('title' === ''){
+            alert("Title is requires");
+            return;
+        }
+
+        const form = new FormData();
+        form.append('title',title);
+        form.append('description',description);
+        form.append('category', categoryId);
+        form.append('type', type);
+        banners.forEach((banner, index)=>{
+            form.append('banners', banner);
+        });
+        products.forEach((product, index)=>{
+            form.append('products', product);
+        })
+        
+        console.log({title, description, type, banners, products});
+        setCreateModalShow(false);
     }
 
 
@@ -42,22 +68,11 @@ const Page = () => {
                 show={createModalshow}
                 modalTitle={'Create New Page'}
                 handleClose={() => setCreateModalShow(false)}
+                handleAddButton={submitPageForm}
             >
                 <Container>
                     <Row>
                         <Col>
-                            {/* <select
-                                className="form-control"
-                                value={categoryId}
-                                onChange={onCategoryChange}
-                            >
-                                <option value="">select category</option>
-                                {
-                                    categories.map(cat =>
-                                        <option key={cat._id} value={cat._id}>{cat.name}</option>
-                                    )
-                                }
-                            </select> */}
                             <Input
                                 type="select"
                                 value={categoryId}
